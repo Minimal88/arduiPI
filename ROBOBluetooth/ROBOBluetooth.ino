@@ -1,16 +1,13 @@
-#define ROBOT_NAME "RandomBot"
 
-// If you haven't configured your device before use this
-#define BLUETOOTH_SPEED 38400 //This is the default baudrate that HC-05 uses
-// If you are modifying your existing configuration, use this:
-// #define BLUETOOTH_SPEED 57600
+#define ROBOT_NAME "JACOBOT"
+
+#define BLUETOOTH_SPEED 38400 //This is the default baudrate that HC-06
 
 #include <SoftwareSerial.h>
 
 // Swap RX/TX connections on bluetooth chip
-//   Pin 10 --> Bluetooth TX
-//   Pin 11 --> Bluetooth RX
-SoftwareSerial mySerial(10, 11); // RX, TX
+
+SoftwareSerial mySerial(2,3); // RX, TX
 
 /*
   The possible baudrates are:
@@ -29,8 +26,8 @@ SoftwareSerial mySerial(10, 11); // RX, TX
 */
 
 void setup() {
-  pinMode(9, OUTPUT);  // this pin will pull the HC-05 pin 34 (key pin) HIGH to switch module to AT mode
-  digitalWrite(9, HIGH);
+  pinMode(4, OUTPUT);  // this pin will pull the HC-05 pin 34 (key pin) HIGH to switch module to AT mode
+  digitalWrite(4, HIGH);
   Serial.begin(9600);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for Leonardo only
@@ -56,9 +53,13 @@ void setup() {
   mySerial.print(rnc);
   waitForResponse();
 
-  // Set baudrate to 57600
-  mySerial.print("AT+UART=57600,0,0\r\n");
+  // Set baudrate to 38400
+  mySerial.print("AT+UART=38400,0,0\r\n");
   waitForResponse();
+
+  //Set PinCode to 0000
+  mySerial.print("AT+PSWD=0000\r\n");
+  waitForResponse();  
 
   Serial.println("Done!");
 }
@@ -71,4 +72,6 @@ void waitForResponse() {
     Serial.write("\n");
 }
 
-void loop() {}
+void loop() {
+waitForResponse();  
+}
