@@ -1,5 +1,120 @@
 /*
+  Bbb
+  
+  bb  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  link
+  Turns on an LED on for one second, then off for one second, repeatedly.
 
+  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO 
+  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
+  the correct LED pin independent of which board is used.
+  If you want to know what pin the on-board LED is connected to on your Arduino model, check
+  the Technical Specs of your board  at https://www.arduino.cc/en/Main/Products
+  
   This example code is in the public domain.
 in1 in2
 0  0      Motor apagado
@@ -7,124 +122,41 @@ in1 in2
 1  0      Atras
 1  1      Motor Apagado 
 
+
+
 */
 
-#include <SoftwareSerial.h>
-
-#define BLUETOOTH_SPEED 38400
-
-SoftwareSerial mySerial(2,3); // RX, TX
-
-
-
 //motor 1
-int pin1_M1=4;//in1 
-int pin2_M1=5;//in2 
-int pin3_M1=6;//control
-
-//
+int pinin1=5; 
+int pinin2=6;
 
 //motor2
-int pin1_M2=7;//in3 
-int pin2_M2=8;//in4
-int pin3_M2=9;//control
-
+int pinin3=9; 
+int pinin4=10;
  
-// config de motores, bluetooth y sensor
+// config de puertos
 void setup() {
-  //Configura seriales
-  Serial.begin(BLUETOOTH_SPEED);
-  mySerial.begin(BLUETOOTH_SPEED);
-  
-  // asigna modo digital para el driver de motor
-  pinMode(pin1_M1, OUTPUT);
-  pinMode(pin2_M1, OUTPUT);
-  pinMode(pin3_M1, OUTPUT);
-  
-  pinMode(pin1_M2, OUTPUT);
-  pinMode(pin2_M2, OUTPUT);
-  pinMode(pin3_M2, OUTPUT);
+  // asigna modo digital alos puertos escogidos
+  pinMode(pinin1, OUTPUT);
+  pinMode(pinin2, OUTPUT);
 
-  //Activa los motores
-  digitalWrite(pin3_M1, HIGH);   
-  digitalWrite(pin3_M2, HIGH);   
-  
-    
-}
-
-void waitForResponse() {    
-    while (mySerial.available()) {
-      Serial.write(mySerial.read());
-    }
-    Serial.write("\n");
+  pinMode(pinin3, OUTPUT);
+  pinMode(pinin4, OUTPUT);
 }
 
 // the loop function runs over and over again forever
 void loop() {
 
-  
-  
-  int dataIN= mySerial.read();
-
-  Serial.println(dataIN);
-
-  if (dataIN==103){
-    //Serial.write("go");   //ADELANTE
-    digitalWrite(pin1_M2, HIGH);   
-    digitalWrite(pin2_M2, LOW); 
-
-    digitalWrite(pin1_M1, HIGH);   
-    digitalWrite(pin2_M1, LOW); 
-    
-  }
-  else if (dataIN==98){ //ATRAS    
-    digitalWrite(pin1_M1, LOW);   
-    digitalWrite(pin2_M1, HIGH);   
-
-    digitalWrite(pin1_M2, LOW);   
-    digitalWrite(pin2_M2, HIGH); 
-  }
-
-  else if (dataIN==115){ //STOP
-    digitalWrite(pin1_M1, LOW);   
-    digitalWrite(pin2_M1, LOW);   
-
-    digitalWrite(pin1_M2, LOW);   
-    digitalWrite(pin2_M2, LOW); 
-  }
-
-  
-  else if (dataIN==108){ //LEFT
-    digitalWrite(pin1_M1, HIGH);   
-    digitalWrite(pin2_M1, LOW);   
-
-    digitalWrite(pin1_M2, LOW);   
-    digitalWrite(pin2_M2, LOW); 
-  }
-
-  else if (dataIN==114){ //RIGHT
-    digitalWrite(pin1_M1, LOW);   
-    digitalWrite(pin2_M1, LOW);   
-
-    digitalWrite(pin1_M2, HIGH);   
-    digitalWrite(pin2_M2, LOW); 
-  }
-  
-  
-  
-  //delay(500);
-
-  
   // MOTOR 1 VA PARA ADELANTE 2 SEGUNDOS
-//  digitalWrite(pin1_M1, LOW);   
-//  digitalWrite(pin2_M1, HIGH);   
-//  delay(2000);       
+  digitalWrite(pinin1, LOW);   
+  digitalWrite(pinin2, HIGH);   
+  delay(2000);       
 
 
-   // MOTOR 2 VA PARA ATRAS 2 SEGUNDOS
-//  digitalWrite(pin1_M2, LOW);   
-//  digitalWrite(pin2_M2, HIGH);   
-//  delay(2000);       
+   // MOTOR 2 VA PARA ADELANTE 2 SEGUNDOS
+  digitalWrite(pinin3, LOW);   
+  digitalWrite(pinin4, HIGH);   
+  delay(2000);       
   
  
 }
