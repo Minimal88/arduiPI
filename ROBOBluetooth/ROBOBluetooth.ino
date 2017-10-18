@@ -1,4 +1,3 @@
-
 #define ROBOT_NAME "JACOBOT"
 
 #define BLUETOOTH_SPEED 38400 //This is the default baudrate that HC-06
